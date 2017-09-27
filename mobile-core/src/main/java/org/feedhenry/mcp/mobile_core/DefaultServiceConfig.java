@@ -11,24 +11,23 @@ import java.util.Map;
  * Created by summers on 9/26/17.
  */
 
-class DefaultServiceConfig implements ServiceConfig {
+public class DefaultServiceConfig implements ServiceConfig {
 
-    private final Map<String, String> config;
+    public final Map<String, JsonElement> config;
 
-    DefaultServiceConfig(Map<String, String> config) {
+    DefaultServiceConfig(Map<String, JsonElement> config) {
         this.config = config;
     }
 
     @Override
-    public Map<String, String> getConfigFor(String serviceName) {
-        String serviceConfig = config.get(serviceName);
+    public Map<String, JsonElement> getConfigFor(String serviceName) {
+        JsonElement serviceConfig = config.get(serviceName);
         if (serviceConfig == null) {
             return null;
         }
 
         //TODO this looks silly, find a better way to handle the nested JSON
-        JsonElement jsonConfig = new JsonParser().parse(serviceConfig);
-        Map<String, String> map = new Gson().fromJson(jsonConfig, new TypeToken<Map<String, String>>() {
+        Map<String, JsonElement> map = new Gson().fromJson(serviceConfig, new TypeToken<Map<String, JsonElement>>() {
         }.getType());
 
         if (map.containsKey("config")) {
