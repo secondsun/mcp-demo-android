@@ -31,7 +31,8 @@ public class DefaultServiceConfig implements ServiceConfig {
         }.getType());
 
         if (map.containsKey("config")) {
-            return map;
+            return new Gson().fromJson(map.get("config").getAsJsonObject(), new TypeToken<Map<String, JsonElement>>() {
+            }.getType());
         }
         return null;
     }
