@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">mobile-core</string>
-    <string name='mcp_host' translatable='false'>stub</string>
-    <string name='mcp_apiKey' translatable='false'>stub</string>
-    <string name='mcp_appId' translatable='false'>stub</string>
-</resources>

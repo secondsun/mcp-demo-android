@@ -1,5 +1,5 @@
 {
-  "host":"https://release",
-  "appID":"testandroid2-1506953553",
-  "apiKey":"d66a9501-1010-478c-a482-b646ddf7e410"
+  "host":"https://192.168.37.1:3001",
+  "appID":"release-android-1506958353",
+  "apiKey":"e9162b57-03b8-4ece-8e80-293074fbca4b"
 }

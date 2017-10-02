@@ -40,8 +40,8 @@ public class ShowConfig extends AppCompatActivity {
         core.configure(this).observeOn(AndroidSchedulers.mainThread())
                 .subscribe((serviceConfig)-> {
                     Map<String, JsonElement> syncConfig = serviceConfig.getConfigFor("fh-sync-server");
-                    textView.setText("Staring Sync");
-                    startSync(syncConfig.get("uri").getAsString());
+                    textView.setText(new GsonBuilder().setPrettyPrinting().create().toJson(serviceConfig));
+                    //startSync(syncConfig.get("uri").getAsString());
                 });
     }
 
