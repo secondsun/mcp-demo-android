@@ -1,6 +1,7 @@
 package org.feedhenry.mcp.mobile_core;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -60,6 +61,16 @@ public class MobileCore {
                 }
             }).sslSocketFactory(sslContext.getSocketFactory()).build();
     }
+
+    public Single<ServiceConfig> configure(final Context context) {
+        Resources resources = context.getResources();
+        String host = resources.getString(R.string.mcp_host);
+        String appId = resources.getString(R.string.mcp_appId);
+        String apiKey = resources.getString(R.string.mcp_apiKey);
+
+        return configure(new ServerConfig(host, apiKey, appId));
+    }
+
 
     public Single<ServiceConfig> configure(final ServerConfig configuration) {
 

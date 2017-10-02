@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'mcp-android-plugin'
 
 android {
     compileSdkVersion 26
@@ -11,6 +12,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false

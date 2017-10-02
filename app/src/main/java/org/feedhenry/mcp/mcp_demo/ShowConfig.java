@@ -37,7 +37,7 @@ public class ShowConfig extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         MobileCore core =new MobileCore(getApplicationContext());
-        core.configure(new ServerConfig("https://192.168.37.1:3001", "ff0ee954-6026-41ae-83b2-b532fabd088a","android-demo-3-1506811864")).observeOn(AndroidSchedulers.mainThread())
+        core.configure(this).observeOn(AndroidSchedulers.mainThread())
                 .subscribe((serviceConfig)-> {
                     Map<String, JsonElement> syncConfig = serviceConfig.getConfigFor("fh-sync-server");
                     textView.setText("Staring Sync");
