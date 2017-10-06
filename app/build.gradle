@@ -3,7 +3,7 @@ apply plugin: 'mcp-android-plugin'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "org.feedhenry.mcp.mcp_demo"
         minSdkVersion 19
@@ -36,8 +36,11 @@ dependencies {
 
     implementation('org.feedhenry:mcp-core-android:5.0.0@aar') {
         transitive = true
+        exclude module: 'com.google.code.gson'
     }
-    implementation 'org.feedhenry:fh-sync-android:4.0.1@aar'
+    implementation('org.feedhenry:fh-sync-android:4.0.2@aar') {
+        exclude module: 'com.google.code.gson'
+    }
 
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -45,7 +48,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
 
     implementation 'com.android.support:support-vector-drawable:26.1.0'
-    compile 'com.google.code.gson:gson:2.8.1'
+    //compile 'com.google.code.gson:gson:2.8.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
