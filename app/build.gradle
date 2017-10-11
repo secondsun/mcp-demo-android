@@ -8,6 +8,7 @@ android {
         applicationId "org.feedhenry.mcp.mcp_demo"
         minSdkVersion 19
         targetSdkVersion 26
+        vectorDrawables.useSupportLibrary = true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -38,7 +39,7 @@ dependencies {
         transitive = true
         exclude module: 'com.google.code.gson'
     }
-    implementation('org.feedhenry:fh-sync-android:4.0.2@aar') {
+    implementation('org.feedhenry:fh-sync-android:4.0.0@aar') {
         exclude module: 'com.google.code.gson'
     }
 
