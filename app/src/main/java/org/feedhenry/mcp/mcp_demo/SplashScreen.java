@@ -21,7 +21,7 @@ import java.util.Map;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
- * THis activity displays a splash screen while the configuration is loaded in the background.
+ * This activity displays a splash screen while the configuration is loaded in the background.
  */
 public class SplashScreen extends AppCompatActivity {
 

@@ -16,6 +16,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            mcp {
+                enableCertificateHelper true
+                hosts = ['https://fh-sync-server-releasemcp.192.168.37.1.nip.io:443/']
+            }
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
