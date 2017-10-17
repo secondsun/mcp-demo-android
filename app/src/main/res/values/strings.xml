@@ -5,4 +5,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="cancel">Cancel</string>
+    <string name="test">Test</string>
+    <string name="save">Save</string>
+    <string name="item_name_hint">Name of the item</string>
+    <string name="feedhenry_logo">Feedhenry Logo</string>
+    <string name="new_item">New item</string>
+    <string name="edit_item">Edit item</string>
 </resources>

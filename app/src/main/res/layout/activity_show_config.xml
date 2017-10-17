@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.feedhenry.mcp.mcp_demo.SplashScreen">
+    tools:context="org.feedhenry.mcp.mcp_demo.SyncActivity">
 
 
     <include layout="@layout/content_show_config" />
+
 
 </android.support.design.widget.CoordinatorLayout>
