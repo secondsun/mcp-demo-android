@@ -46,7 +46,7 @@ dependencies {
         transitive = true
         exclude module: 'com.google.code.gson'
     }
-    implementation('org.feedhenry:fh-sync-android:4.0.1@aar') {
+    implementation('org.feedhenry:fh-sync-android:4.0.0@aar') {
         exclude module: 'com.google.code.gson'
     }
 
