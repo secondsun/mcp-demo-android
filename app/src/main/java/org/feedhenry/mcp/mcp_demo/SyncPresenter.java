@@ -94,6 +94,8 @@ public class SyncPresenter implements FHSyncListener {
             }
         }
 
+        syncActivity.syncDocumentsUpdated(itemsToSync);
+
     }
 
     @Override
