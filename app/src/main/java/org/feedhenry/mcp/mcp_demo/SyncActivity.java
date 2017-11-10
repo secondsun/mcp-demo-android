@@ -18,10 +18,12 @@ import com.feedhenry.sdk.sync.FHSyncClient;
 import com.google.gson.JsonElement;
 
 import org.feedhenry.mcp.mcp_demo.adapter.ShoppingItemAdapter;
+import org.feedhenry.mcp.mcp_demo.helper.KeycloakHelper;
 import org.feedhenry.mcp.mcp_demo.helper.SwipeTouchHelper;
 import org.feedhenry.mcp.mcp_demo.listener.RecyclerItemClickListener;
 import org.feedhenry.mcp.mcp_demo.model.ShoppingItem;
 import org.feedhenry.mcp.mobile_core.MobileCore;
+import org.jboss.aerogear.android.core.Callback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -84,7 +86,9 @@ public class SyncActivity extends AppCompatActivity implements SyncPresenter.Vie
     protected void onPause() {
         super.onPause();
         presenter.disconnect();
-        client.stop(DATASET_ID);
+        try {
+            client.stop(DATASET_ID);
+        } catch (Exception ignore) {}
     }
 
     @Override
@@ -98,12 +102,34 @@ public class SyncActivity extends AppCompatActivity implements SyncPresenter.Vie
                 .subscribe((serviceConfig)-> {
                     //setup sync
                     Map<String, JsonElement> syncConfig = serviceConfig.getConfigFor("fh-sync-server");
-                    startSync(syncConfig.get("uri").getAsString());
+                    Map<String, JsonElement> keycloakConfig = serviceConfig.getConfigFor("keycloak");
+                    if (keycloakConfig != null) {
+                        KeycloakHelper.Builder builder = new KeycloakHelper.Builder();
+                        builder.setAuthzUrl(keycloakConfig.get("auth-server-url").getAsString());
+                        builder.setClientId(keycloakConfig.get("clientId").getAsString());
+                        builder.setRealm(keycloakConfig.get("realm").getAsString());
+                        KeycloakHelper helper = builder.build();
+
+                            helper.connect(this, new Callback() {
+                                @Override
+                                public void onSuccess(Object data) {
+                                    startSync(syncConfig.get("uri").getAsString(), helper.getBearerToken());
+                                }
+
+                                @Override
+                                public void onFailure(Exception e) {
+                                    Log.e("ERROR", e.getMessage(), e);
+                                }
+                            });
+
+                    } else {
+                        startSync(syncConfig.get("uri").getAsString(), null);
+                    }
                 });
     }
 
-    private void startSync(String uri) {
-        presenter.connect(this, uri);
+    private void startSync(String uri, String bearerToken) {
+        presenter.connect(this, uri, bearerToken);
         client = presenter.getClient();
     }
 

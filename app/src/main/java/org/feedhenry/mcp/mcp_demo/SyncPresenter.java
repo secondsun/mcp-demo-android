@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.feedhenry.sdk.android.AndroidUtilFactory;
+import com.feedhenry.sdk.android.NetworkClientImpl;
 import com.feedhenry.sdk.sync.FHSyncClient;
 import com.feedhenry.sdk.sync.FHSyncConfig;
 import com.feedhenry.sdk.sync.FHSyncListener;
@@ -17,6 +18,8 @@ import org.json.JSONObject;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
+
+import okhttp3.Headers;
 
 /**
  * Created by summers on 10/17/17.
@@ -36,7 +39,7 @@ public class SyncPresenter implements FHSyncListener {
 
     private View syncActivity;
 
-    public void connect(View syncActivity, String uri) {
+    public void connect(View syncActivity, String uri, String bearerToken) {
         this.syncActivity = syncActivity;
         FHSyncConfig config = new FHSyncConfig.Builder()
                 .notifyLocalUpdateApplied(true)
@@ -46,7 +49,10 @@ public class SyncPresenter implements FHSyncListener {
         UtilFactory utilFactory = new AndroidUtilFactory(syncActivity.getApplicationContext());
         utilFactory.getNetworkClient().setCloudURL(uri + "/sync/");
         utilFactory.getNetworkClient().registerNetworkListener();
-
+        if (bearerToken != null) {
+            Headers.Builder builder = new Headers.Builder().add("Authorization", bearerToken);
+            ((NetworkClientImpl) utilFactory.getNetworkClient()).setHeaders(builder.build());
+        }
         client = new FHSyncClient(config, utilFactory);
         client.manage(DATASET_ID, null, new JSONObject());
         client.setListener(this);

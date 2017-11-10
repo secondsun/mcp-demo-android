@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.afollestad.material-dialogs:core:0.9.0.1'
+    compile 'org.jboss.aerogear:aerogear-android-authz:3.0.1'
 
     implementation 'com.android.support:support-vector-drawable:26.1.0'
     //compile 'com.google.code.gson:gson:2.8.1'
